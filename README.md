@@ -73,7 +73,7 @@ We will then group each rows with 50 rows, with one-hot encoding and some featur
 
 # Results
 
-The total loss using the MAE was 
+The total loss using the MAE was 228 meters the total race track being 5412 meters. 
 
 ## Average loss per driver across different iterations
 
