@@ -4,6 +4,13 @@
 
 This project uses the Transformer model from the paper 'Attention is all you need', to predict the location of all drivers in a race in Formula one. 
 
+## Data Description 
+
+
+
+## Model Description
+The model will take in 50 sequences of datapoints (information regarding all 20 drivers) and predict what the next 100 iterations of driver locations will be. 
+
 # How to Run
 
 First install the libraries
