@@ -3,7 +3,7 @@
 # Description
 
 This project uses the Transformer model from the paper 'Attention is all you need', to predict the location of all drivers in a race in Formula one. 
-
+The data was collected from the FastF1 API. 
 
 ## Model Description
 
@@ -18,6 +18,17 @@ The objective function was an altered custom MAE function that was needed to cor
 The Adam optimizer was used to optimize the parameter space. 
 
 ## Data Description 
+
+The data is collected from the FastF1 API, using its telemetry data from a single race and with the transformer model estimate where a driver will be after a certain number of data points. 
+
+Specifically, it collects 6 seconds worth of data to predict where each driver would be in the next 12 seconds. Using the distance information we will predict where the driver will be in terms of distance in the next 12 seconds. The racetrack selected for this project was the 2023 Bahrain Grand Prix.
+
+
+The reasons for selecting the 2023 Bahrain Grand Prix are as follows:
+1. 2022 was the last major rule change made by the FIA hence any data before 2022 has major car design changes the model cannot capture without more data
+2. During 2022 and 2023 the changes made to the vehicles in terms of design, engine and functionality were quite significant and this is shown in the data-analysis file
+3. The Bahrain Grand Prix was the first race of the 2023 season, thus making it a relatively fair race for all teams as it was the race with the least amount of changes
+4. Moreover, by narrowing down to a single race this would help in analyzing the loss values
 
 The data is consisted of 927 columns and around 430000 rows. For each driver we have, 
 
@@ -62,15 +73,19 @@ We will then group each rows with 50 rows, with one-hot encoding and some featur
 
 # Results
 
+The total loss using the MAE was 
+
 ## Average loss per driver across different iterations
 
 The performance and loss values of the model were divided into 4 sub groups and were as shown below. 
 
-![img](Images/group_2.png "Logo Title Text 1")
+![img](Images/group1.png "Avg Loss values of Group 1")
 
-![img](Images/group_3.png "Logo Title Text 1")
+![img](Images/group2.png "Avg Loss values of Group 2")
 
-![img](Images/group_4.png "Logo Title Text 1")
+![img](Images/group3.png "Avg Loss values of Group 3")
+
+![img](Images/group4.png "Avg Loss values of Group 4")
 
 Most of the error values occurred for the following reasons:
 
@@ -88,26 +103,8 @@ Overall, the issue seems to be with the way the datapoints were scaled and not o
 
 Some iterations exhibited a good fit for the model as shown below where the loss values are contained within 100 meters
 
-![img](Images/good_exm.png "Logo Title Text 1")
+![img](Images/good_exm.png "Loss values for iteration 10")
 
 While some iterations exhibited a poor fit as shown below. 
 
-![img](Images/bad_exm.png "Logo Title Text 1")
-
-
-# How to Run
-
-First install the libraries
-
-
-
-It uses data from the FastF1 API to collect telemetry data from a single race and with the transformer model estimate where a driver will be after a certain number of data points. 
-Specifically, it collects 6 seconds worth of data to predict where each driver would be in the next 12 seconds. Using the distance information we will predict where the driver will be in terms of distance in the next 12 seconds. The racetrack selected for this project was the 2023 Bahrain Grand Prix.
-
-Data:
-
-The reasons for selecting the 2023 Bahrain Grand Prix are as follows:
-1. 2022 was the last major rule change made by the FIA hence any data before 2022 has major car design changes the model cannot capture
-2. During 2022 and 2023 the changes made to the vehicles in terms of design, engine and functionality were quite significant and this is shown in the data-analysis file
-3. The Bahrain Grand Prix was the first race of the 2023 season, thus making it a relatively fair race for all teams as it was the race with the least amount of changes
-
+![img](Images/bad_exm.png "Loss values for iteration 20")
