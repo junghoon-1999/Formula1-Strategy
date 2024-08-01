@@ -61,7 +61,7 @@ class data_importer():
                 total_drv = pd.concat([total_drv, temp_tele.reset_index(drop=True)], axis=0)
 
             # Drop columns we don't need 
-            total_drv.drop(columns = ['Time', 'Source', 'DriverAhead', 'DistanceToDriverAhead'], inplace=True)
+            total_drv.drop(columns = ['Time', 'Source', 'DriverAhead', 'DistanceToDriverAhead', 'RelativeDistance'], inplace=True)
 
             # Add a status column for each telemetry input
             outcome = sesh_r[sesh_r['Abbreviation'] == drv]['Status'].values[0]
