@@ -9,7 +9,7 @@ This project uses the Transformer model from the paper 'Attention is all you nee
 
 The model we will be using is as shown below. 
 
-![img](Images/Model_Architecture_diagram.png "Logo Title Text 1")
+![img](Images/model_diagram.png "Logo Title Text 1")
 
 The number of layers and heads were decided with hyperparameter tuning using *Optuna*. Each hidden feedforward network layer and attention layer used GELU as its activation function. 
 
@@ -62,6 +62,37 @@ We will then group each rows with 50 rows, with one-hot encoding and some featur
 
 # Results
 
+## Average loss per driver across different iterations
+
+The performance and loss values of the model were divided into 4 sub groups and were as shown below. 
+
+![img](Images/group_2.png "Logo Title Text 1")
+
+![img](Images/group_3.png "Logo Title Text 1")
+
+![img](Images/group_4.png "Logo Title Text 1")
+
+Most of the error values occurred for the following reasons:
+
+1. The model output had a decreasing trend when drivers were 70-80% completed with the race for some datapoints. This may be due to the fact that sudden changes from the end of the race to the starting point was something the model was not able to fully comprehend and produce
+
+2. The model had trouble fitting drivers at the start of the race for some datapoints. 
+
+3. Team strategic decisions (e.g. switching positions between the first and second driver) was something the model was not able to predict, but this is expected as the data did not hold information regarding this. 
+
+4. When the drivers are near the starting point at the end/beginning of the lap, and the predictions are made on the opposite side, the loss is calculated by subtracting around the race not the distance between. This explains some of the drastic error values ranging from 4000-5000. This was addressed using a Custom MAE that would calculate the short distance, but the threshold was set at 4800 meters, leading to losses having extreme values. 
+
+Overall, the issue seems to be with the way the datapoints were scaled and not on the model itself. Moreover, these problems can be addressed with more data. 
+
+## Average loss per driver at a certain iteration
+
+Some iterations exhibited a good fit for the model as shown below where the loss values are contained within 100 meters
+
+![img](Images/good_exm.png "Logo Title Text 1")
+
+While some iterations exhibited a poor fit as shown below. 
+
+![img](Images/bad_exm.png "Logo Title Text 1")
 
 
 # How to Run
