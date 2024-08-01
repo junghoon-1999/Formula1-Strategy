@@ -6,7 +6,7 @@ This project uses the Transformer model from the paper 'Attention is all you nee
 
 ## Data Description 
 
-
+![alt text](https://github.com/junghoon-1999/Formula1-Strategy/tree/main/Images/Model_Architecture_diagram.png "Logo Title Text 1")
 
 ## Model Description
 The model will take in 50 sequences of datapoints (information regarding all 20 drivers) and predict what the next 100 iterations of driver locations will be. 
