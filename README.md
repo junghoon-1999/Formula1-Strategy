@@ -75,6 +75,8 @@ We will then group each rows with 50 rows, with one-hot encoding and some featur
 
 The total loss using the MAE was 228 meters the total race track being 5412 meters. 
 
+![img](Images/general_train_error.png "Plot of generalization and training error")
+
 ## Average loss per driver across different iterations
 
 The performance and loss values of the model were divided into 4 sub groups and were as shown below. 
