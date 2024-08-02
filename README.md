@@ -68,7 +68,7 @@ Then we will also add weather related data
 | WindSpeed | Int | Speed of the wind | 
 
 
-We will then group each rows with 50 rows, with one-hot encoding and some feature engineering (50, 927) and use this to predict the next consecutive 100 positions of the drivers (50, 40). The position will be measure using the **Distance** column. 
+We will then group each rows with 50 rows, with one-hot encoding and some feature engineering (50, 927) and use this to predict the next consecutive 100 positions of the 20 drivers (50, 40). The position will be measure using the **Distance** column. 
 
 input :
 
@@ -78,7 +78,7 @@ input :
 | ... | ... | ... | ... | ... | ... |
 | data at timepoint 50 | data at timepoint 50 | data at timepoint 50 | ... | data at timepoint 50 | ... | data at timepoint 50 |
 
-outpu:
+output:
 | VER_Distance | PER_Distance | LEC_Distance | ... | VER_Distance | PER_Distance | LEC_Distance | ... |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | data at timepoint 1 | data at timepoint 1 | data at timepoint 1 | ... | data at timepoint 51 | data at timepoint 51 | data at timepoint 51 | ... |
@@ -111,7 +111,10 @@ Most of the error values occurred for the following reasons:
 
 3. Team strategic decisions (e.g. switching positions between the first and second driver) was something the model was not able to predict, but this is expected as the data did not hold information regarding this. 
 
-4. When the drivers are near the starting point at the end/beginning of the lap, and the predictions are made on the opposite side, the loss is calculated by subtracting around the race not the distance between. This explains some of the drastic error values ranging from 4000-5000. This was addressed using a Custom MAE that would calculate the short distance, but the threshold was set at 4800 meters, leading to losses having extreme values. 
+4. When the drivers are near the starting point at the end/beginning of the lap, and the predictions are made on the opposite side, the loss is calculated by subtracting around the race not the distance between as shown in the figure below. This explains some of the drastic error values ranging from 4000-5000. This was addressed using a Custom MAE that would calculate the short distance, but the threshold was set at 4800 meters, leading to losses having extreme values. 
+
+![img](Images/Racetrack.png "Racetrack (Bahrain)")
+
 
 Overall, the issue seems to be with the way the datapoints were scaled and not on the model itself. However, these problems can be addressed with more data. 
 
