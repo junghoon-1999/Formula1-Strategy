@@ -70,6 +70,20 @@ Then we will also add weather related data
 
 We will then group each rows with 50 rows, with one-hot encoding and some feature engineering (50, 927) and use this to predict the next consecutive 100 positions of the drivers (50, 40). The position will be measure using the **Distance** column. 
 
+input :
+
+| VER_RPM | VER_Speed | ... | VER_Distance | ... |PIA_Distance|
+| --- | --- | --- | --- | --- | --- |
+| data at timepoint 1 | data at timepoint 1 | data at timepoint 1 | ... | data at timepoint 1 | ... | data at timepoint 1 |
+| ... | ... | ... | ... | ... | ... |
+| data at timepoint 50 | data at timepoint 50 | data at timepoint 50 | ... | data at timepoint 50 | ... | data at timepoint 50 |
+
+outpu:
+| VER_Distance | PER_Distance | LEC_Distance | ... | VER_Distance | PER_Distance | LEC_Distance | ... |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| data at timepoint 1 | data at timepoint 1 | data at timepoint 1 | ... | data at timepoint 51 | data at timepoint 51 | data at timepoint 51 | ... |
+| ... | ... | ... | ... | ... | ... |
+| data at timepoint 50 | data at timepoint 50 | data at timepoint 50 | ... | data at timepoint 100 | data at timepoint 100 | data at timepoint 100 | ... |
 
 # Results
 
@@ -99,7 +113,7 @@ Most of the error values occurred for the following reasons:
 
 4. When the drivers are near the starting point at the end/beginning of the lap, and the predictions are made on the opposite side, the loss is calculated by subtracting around the race not the distance between. This explains some of the drastic error values ranging from 4000-5000. This was addressed using a Custom MAE that would calculate the short distance, but the threshold was set at 4800 meters, leading to losses having extreme values. 
 
-Overall, the issue seems to be with the way the datapoints were scaled and not on the model itself. Moreover, these problems can be addressed with more data. 
+Overall, the issue seems to be with the way the datapoints were scaled and not on the model itself. However, these problems can be addressed with more data. 
 
 ## Average loss per driver at a certain iteration
 
